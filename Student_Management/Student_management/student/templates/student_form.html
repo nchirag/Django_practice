@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ action }} Student</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-4">
+        <h2 class="mb-4">{{ action }} Student</h2>
+        <form method="post" action="{% url 'add_student' %}">
+            {% csrf_token %}
+            
+            <!-- Name Field -->
+            <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input 
+                    type="text" 
+                    id="name" 
+                    class="form-control" 
+                    name="name" 
+                    value="{{ student.name|default_if_none:'' }}" 
+                    required
+                >
+            </div>
+            
+            <!-- Age Field -->
+            <div class="mb-3">
+                <label for="age" class="form-label">Age</label>
+                <input 
+                    type="number" 
+                    id="age" 
+                    class="form-control" 
+                    name="age" 
+                    value="{{ student.age|default_if_none:'' }}" 
+                    required
+                >
+            </div>
+            
+            <!-- Contact Field -->
+            <div class="mb-3">
+                <label for="contact" class="form-label">Contact</label>
+                <input 
+                    type="text" 
+                    id="contact" 
+                    class="form-control" 
+                    name="contact" 
+                    value="{{ student.contact|default_if_none:'' }}" 
+                    required
+                >
+            </div>
+            
+            <!-- Department Field -->
+            <div class="mb-3">
+                <label for="department" class="form-label">Department</label>
+                <select 
+                    id="department" 
+                    class="form-select" 
+                    name="department"
+                >
+                    <option value="CS" {% if student.department == 'CS' %}selected{% endif %}>
+                        Computer Science
+                    </option>
+                    <option value="ME" {% if student.department == 'ME' %}selected{% endif %}>
+                        Mechanical
+                    </option>
+                    <option value="EE" {% if student.department == 'EE' %}selected{% endif %}>
+                        Electrical
+                    </option>
+                </select>
+            </div>
+            
+            <!-- Status Field -->
+            <div class="mb-3 form-check">
+                <input 
+                    type="checkbox" 
+                    id="status" 
+                    class="form-check-input" 
+                    name="status" 
+                    {% if student.status %}checked{% endif %}
+                >
+                <label for="status" class="form-check-label">Status</label>
+            </div>
+            
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-success">Save</button>
+        </form>
+    </div>
+</body>
+</html>
