@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Django Tutorial</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            color: #333;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        table {
+            border-radius: 10px;
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Django Tutorial</h1>
+    <p>Welcome to the Django tutorial. This is a beginner-friendly guide to learning Django, a powerful Python web
+        framework.</p>
+
+    <h2>Topics Covered</h2>
+    <ul>
+        <li>Introduction to Django</li>
+        <li>To go to success page - <a href="success">Click here</a></li>
+        <li>Setting up a Django project</li>
+        <li>Creating views and templates</li>
+        <li>Working with models and databases</li>
+        <li>Deploying a Django application</li>
+    </ul>
+    <h2>Peoples</h2>
+
+
+    <table>
+        <tr>
+            <th>S.no</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Can vote</th>
+        </tr>
+        {% for people in peoples %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{people.name}}</td>
+            <td>{{people.age}}</td>
+            <td>
+                {% if people.age >= 18 %}
+                Yes, since his age is {{people.age}}
+                {% else %}
+                No his age is {{people.age}}
+                {% endif %}
+            </td>
+        </tr>
+
+        {% endfor %}
+    </table>
+
+    <h2>Avaiability Check</h2>
+    <ul>
+        {% for person in peoples_availability %}
+            {% if person.available %}
+                <li>{{ person.name }} is available</li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+
+
+
+    <h2>Contact Us</h2>
+    <table>
+        <tr>
+            <th>S.no</th>
+            <th>Name</th>
+            <th>Can Vote</th>
+            <th>Contact details</th>
+        </tr>
+        {% for people in peoples %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{people.name}}</td>
+            <td>
+                {% if people.age >= 18 %}
+                Yes
+                {% else %}
+                No
+                {% endif %}
+            </td>
+            <td>
+                {% if people.age >= 18 %}
+                {{people.contact}}
+                {% else %}
+                under age
+                {% endif %}
+
+            </td>
+        </tr>
+
+        {% endfor %}
+    </table>
+
+    <p>If you have any questions, feel free to reach out at <a
+            href="mailto:support@djangotutorial.com">support@djangotutorial.com</a>.</p>
+</body>
+
+</html>
